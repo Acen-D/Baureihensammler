@@ -62,16 +62,16 @@ fun CollectionScreen(
     Text("Meine Sammlung", fontWeight = FontWeight.Bold, color = colors.onBackground)
     Spacer(modifier = Modifier.height(6.dp))
     OutlinedButton(onClick = { showResetDialog = true }, enabled = hasAnyCollectionEntry) {
-        Text("Sammlung zurucksetzen")
+        Text("Sammlung zurücksetzen")
     }
 
     if (showResetDialog) {
         AlertDialog(
             onDismissRequest = { showResetDialog = false },
-            title = { Text("Sammlung zurucksetzen?") },
+            title = { Text("Sammlung zurücksetzen?") },
             text = {
                 Text(
-                    "Bist du sicher? All dein Fortschritt wird geloscht. Diese Aktion kann nicht ruckgangig gemacht werden."
+                    "Bist du sicher? All dein Fortschritt wird gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
                 )
             },
             confirmButton = {
@@ -80,7 +80,7 @@ fun CollectionScreen(
                         showResetDialog = false
                         onResetCollection()
                     }
-                ) { Text("Ja, loschen") }
+                ) { Text("Ja, löschen") }
             },
             dismissButton = {
                 TextButton(onClick = { showResetDialog = false }) { Text("Abbrechen") }
@@ -141,7 +141,7 @@ fun CollectionScreen(
                             }
                             Spacer(modifier = Modifier.height(6.dp))
                             OutlinedButton(onClick = { onDeletePhoto(entry) }) {
-                                Text("Foto loschen")
+                                Text("Foto löschen")
                             }
                         }
                     }

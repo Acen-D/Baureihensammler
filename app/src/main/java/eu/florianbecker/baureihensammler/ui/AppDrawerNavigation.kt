@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DirectionsRailway
+import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Search
@@ -52,6 +53,13 @@ fun AppDrawerNavigation(
             selected = currentView == "directory",
             icon = { Icon(Icons.Outlined.MenuBook, contentDescription = null) },
             onClick = { onNavigate("directory") },
+            modifier = Modifier.padding(horizontal = 12.dp)
+        )
+        NavigationDrawerItem(
+            label = { Text("Feedback") },
+            selected = currentView == "feedback",
+            icon = { Icon(Icons.Outlined.Feedback, contentDescription = null) },
+            onClick = { onNavigate("feedback") },
             modifier = Modifier.padding(horizontal = 12.dp)
         )
         NavigationDrawerItem(

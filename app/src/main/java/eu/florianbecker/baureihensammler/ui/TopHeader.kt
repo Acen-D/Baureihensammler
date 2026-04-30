@@ -27,6 +27,7 @@ fun TopHeader(
     val showSearchIcon =
         currentView == "collection" ||
             currentView == "directory" ||
+            currentView == "feedback" ||
             currentView == "settings" ||
             currentView == "logs"
     Row(

@@ -14,9 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,9 +41,11 @@ import eu.florianbecker.baureihensammler.collection.collectionDateFormatter
 import eu.florianbecker.baureihensammler.collection.loadCollection
 import eu.florianbecker.baureihensammler.collection.loadDebugMode
 import eu.florianbecker.baureihensammler.collection.loadPrivacyOfflineMode
+import eu.florianbecker.baureihensammler.collection.loadPrivacyTooltipShown
 import eu.florianbecker.baureihensammler.collection.saveCollection
 import eu.florianbecker.baureihensammler.collection.saveDebugMode
 import eu.florianbecker.baureihensammler.collection.savePrivacyOfflineMode
+import eu.florianbecker.baureihensammler.collection.savePrivacyTooltipShown
 import eu.florianbecker.baureihensammler.search.calculatePoints
 import eu.florianbecker.baureihensammler.search.catalogForOrigin
 import eu.florianbecker.baureihensammler.search.findSeries
@@ -147,12 +152,15 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
     var blockExternalWikiSummaries by remember { mutableStateOf(loadPrivacyOfflineMode(context)) }
     var debugModeEnabled by remember { mutableStateOf(loadDebugMode(context)) }
+    var showPrivacyTooltip by remember { mutableStateOf(!loadPrivacyTooltipShown(context)) }
+    var highlightPrivacySetting by remember { mutableStateOf(false) }
 
     BackHandler(
         enabled =
             drawerState.currentValue == DrawerValue.Open ||
                 currentView == "collection" ||
                 currentView == "directory" ||
+                currentView == "feedback" ||
                 currentView == "settings" ||
                 currentView == "logs"
     ) {
@@ -160,6 +168,7 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
             drawerState.currentValue == DrawerValue.Open -> scope.launch { drawerState.close() }
             currentView == "collection" -> currentView = "search"
             currentView == "directory" -> currentView = "search"
+            currentView == "feedback" -> currentView = "search"
             currentView == "settings" -> currentView = "search"
             currentView == "logs" -> currentView = "search"
         }
@@ -196,6 +205,7 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
             ) {
                 val searchScroll = rememberScrollState()
                 val settingsScroll = rememberScrollState()
+                val feedbackScroll = rememberScrollState()
                 Column(
                     modifier =
                         Modifier.weight(1f)
@@ -204,6 +214,7 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                                 when (currentView) {
                                     "search" -> Modifier.verticalScroll(searchScroll)
                                     "settings" -> Modifier.verticalScroll(settingsScroll)
+                                    "feedback" -> Modifier.verticalScroll(feedbackScroll)
                                     else -> Modifier
                                 }
                             ),
@@ -323,6 +334,13 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                             catalog = catalogForOrigin(selectedOrigin),
                             selectedOrigin = selectedOrigin
                         )
+                    } else if (currentView == "feedback") {
+                        FeedbackScreen(
+                            privacyModeEnabled = blockExternalWikiSummaries,
+                            onOpenMail = { openUrl(context, "mailto:baureihensammler@florianbecker.eu") },
+                            onOpenGitHub = { openUrl(context, "https://github.com/FlorianB-DE/Baureihensammler") },
+                            onOpenSupport = { openUrl(context, "https://buymeacoffee.com/becker.software") }
+                        )
                     } else if (currentView == "settings") {
                         SettingsScreen(
                             blockExternalWikiSummaries = blockExternalWikiSummaries,
@@ -330,6 +348,8 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                                 blockExternalWikiSummaries = v
                                 savePrivacyOfflineMode(context, v)
                             },
+                            highlightPrivacySetting = highlightPrivacySetting,
+                            onPrivacyHighlightShown = { highlightPrivacySetting = false },
                             debugModeEnabled = debugModeEnabled,
                             onDebugModeEnabledChange = { v ->
                                 debugModeEnabled = v
@@ -341,7 +361,13 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                         LogsScreen(logs = DebugLogStore.listLogs(context))
                     }
                 }
-                if (showStatsRow && currentView != "settings" && currentView != "logs" && currentView != "directory") {
+                if (
+                    showStatsRow &&
+                        currentView != "settings" &&
+                        currentView != "logs" &&
+                        currentView != "directory" &&
+                        currentView != "feedback"
+                ) {
                     StatsRow(
                         points = totalPoints,
                         discovered = discoveredForOrigin,
@@ -351,6 +377,40 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
+    }
+
+    if (showPrivacyTooltip) {
+        AlertDialog(
+            onDismissRequest = {
+                showPrivacyTooltip = false
+                savePrivacyTooltipShown(context, true)
+            },
+            title = { Text("Datenschutzmodus") },
+            text = {
+                Text(
+                    "Der Datenschutzmodus befindet sich in den Einstellungen. " +
+                        "Wenn du ihn aktivierst, läuft die App zu 100% offline."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showPrivacyTooltip = false
+                        savePrivacyTooltipShown(context, true)
+                        highlightPrivacySetting = true
+                        currentView = "settings"
+                    }
+                ) { Text("Zu Einstellungen") }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showPrivacyTooltip = false
+                        savePrivacyTooltipShown(context, true)
+                    }
+                ) { Text("Verstanden") }
+            }
+        )
     }
 }
 

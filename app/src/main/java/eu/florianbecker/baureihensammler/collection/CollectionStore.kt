@@ -1,6 +1,7 @@
 package eu.florianbecker.baureihensammler.collection
 
 import android.content.Context
+import eu.florianbecker.baureihensammler.BuildConfig
 import eu.florianbecker.baureihensammler.data.TrainSeriesOrigin
 import org.json.JSONArray
 import org.json.JSONObject
@@ -10,6 +11,7 @@ const val PREFS_NAME = "baureihen_prefs"
 const val KEY_COLLECTION = "collection_entries"
 const val KEY_PRIVACY_OFFLINE_MODE = "privacy_offline_mode"
 const val KEY_DEBUG_MODE = "debug_mode"
+const val KEY_PRIVACY_TOOLTIP_SHOWN = "privacy_tooltip_shown"
 
 val collectionDateFormatter: DateTimeFormatter =
     DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
@@ -33,6 +35,21 @@ fun saveDebugMode(context: Context, enabled: Boolean) {
     context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         .edit()
         .putBoolean(KEY_DEBUG_MODE, enabled)
+        .apply()
+}
+
+fun loadPrivacyTooltipShown(context: Context): Boolean =
+    if (BuildConfig.DEBUG) {
+        false
+    } else {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .getBoolean(KEY_PRIVACY_TOOLTIP_SHOWN, false)
+    }
+
+fun savePrivacyTooltipShown(context: Context, shown: Boolean) {
+    context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        .edit()
+        .putBoolean(KEY_PRIVACY_TOOLTIP_SHOWN, shown)
         .apply()
 }
 
