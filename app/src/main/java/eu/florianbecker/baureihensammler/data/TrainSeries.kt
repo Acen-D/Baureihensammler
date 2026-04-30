@@ -254,6 +254,14 @@ object AlphaTrainSeriesRepository {
             aliases = listOf("0483", "484", "0484"),
         ),
         TrainSeries(
+            baureihe = "642",
+            name = "Siemens Desiro Classic",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 250,
+            wikiArticleTitle = "DB-Baureihe_642",
+        ),
+        TrainSeries(
             baureihe = "1462",
             name = "Siemens Desiro HC",
             category = "Triebzug",
