@@ -17,6 +17,9 @@ name: Build signed release APK
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -78,3 +81,4 @@ jobs:
           name: app-release-signed
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
+          archive: false
