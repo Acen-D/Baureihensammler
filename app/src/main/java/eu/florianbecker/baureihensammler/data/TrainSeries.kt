@@ -221,13 +221,15 @@ object AlphaTrainSeriesRepository {
         TrainSeries("364", "Umbau aus 360", "Kleinlok", 60, 90, "DB-Baureihe_360"),
         TrainSeries("365", "Umbau aus 361", "Kleinlok", 60, 70, "DB-Baureihe_365"),
         TrainSeries("383", "ex LEW EL 16", "Kleinlok", 6, 20, "LEW_EL_16"),
-        TrainSeries("399 105", "Wangerooge L18H", "Kleinlok", 20, 2, "DB-Baureihe_399"),
-        TrainSeries("399 107", "Wangerooge Schoma", "Kleinlok", 20, 2, "DB-Baureihe_399"),
+        
+        TrainSeries("399", "schmalspurige Kleinlokomotiven", "Kleinlok", 20, 10, "DB-Baureihe_399"),
+
+        
         TrainSeries("4125", "Vossloh DE 12", "Diesellokomotive", 120, 20, "Vossloh_DE_12"),
         TrainSeries("4185", "Vossloh DE 18", "Diesellokomotive", 120, 20, "Vossloh_DE_18"),
-        TrainSeries("650", "Vossloh G6", "Kleinlok", 80, 50, "DB-Baureihe_650"),
 
-        // Triebzüge
+
+        // Elektrische Triebzüge
         TrainSeries("401", "ICE 1", "Triebzug", 280, 59, "DB-Baureihe_401"),
         TrainSeries("402", "ICE 2", "Triebzug", 280, 44, "DB-Baureihe_402"),
         TrainSeries("403", "ICE 3", "Triebzug", 330, 67, "DB-Baureihe_403_(1997)"),
@@ -274,14 +276,6 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 106,
             wikiArticleTitle = "DB-Baureihe_483/484",
             aliases = listOf("0483", "484", "0484"),
-        ),
-        TrainSeries(
-            baureihe = "642",
-            name = "Siemens Desiro Classic",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 250,
-            wikiArticleTitle = "DB-Baureihe_642",
         ),
         TrainSeries(
             baureihe = "1462",
@@ -374,6 +368,196 @@ object AlphaTrainSeriesRepository {
             aliases = listOf("0445"),
         ),
         TrainSeries("447", "Alstom Coradia Max", "Triebzug", 160, 20, "Alstom_Coradia_Max"),
-        TrainSeries("463", "Mireo", "Triebzug", 160, 90, "Siemens_Mireo")
+        TrainSeries("463", "Mireo", "Triebzug", 160, 90, "Siemens_Mireo"),
+
+
+        // Dieseltriebwagen
+        TrainSeries(
+            baureihe = "605",
+            name = "ICE TD",
+            category = "Triebzug",
+            vmaxKmh = 200,
+            fleetEstimate = 6, // others were already scrapped
+            wikiArticleTitle = "DB-Baureihe_605",
+        ),
+        TrainSeries(
+            baureihe = "610",
+            name = "Diesel-Pendolino",
+            category = "Triebzug",
+            vmaxKmh = 160,
+            fleetEstimate = 2, // others were already scrapped
+            wikiArticleTitle = "DB-Baureihe_610",
+        ),
+        TrainSeries(
+            baureihe = "611",
+            name = "Neigetechnik-Triebzug",
+            category = "Triebzug",
+            vmaxKmh = 160,
+            fleetEstimate = 4, // others were already scrapped
+            wikiArticleTitle = "DB-Baureihe_611",
+        ),
+        TrainSeries(
+            baureihe = "612",
+            name = "RegioSwinger",
+            category = "Triebzug",
+            vmaxKmh = 160,
+            fleetEstimate = 192,
+            wikiArticleTitle = "DB-Baureihe_612_(1998)",
+        ),
+        TrainSeries(
+            baureihe = "614",
+            name = "Dieseltriebzug 614/914",
+            category = "Triebzug",
+            vmaxKmh = 140,
+            fleetEstimate = 5, // others were already scrapped
+            wikiArticleTitle = "DB-Baureihe_614",
+            aliases = listOf("914"),
+        ),
+        TrainSeries(
+            baureihe = "620",
+            name = "Coradia LINT 81",
+            category = "Triebzug",
+            vmaxKmh = 160,
+            fleetEstimate = 45,
+            wikiArticleTitle = "Alstom_Coradia_LINT",
+        ),
+        TrainSeries(
+            baureihe = "622",
+            name = "Coradia LINT 54",
+            category = "Triebzug",
+            vmaxKmh = 140,
+            fleetEstimate = 70,
+            wikiArticleTitle = "Alstom_Coradia_LINT",
+            aliases = listOf("1622"),
+        ),
+        TrainSeries(
+            baureihe = "623",
+            name = "Coradia LINT 41",
+            category = "Triebzug",
+            vmaxKmh = 140,
+            fleetEstimate = 714,
+            wikiArticleTitle = "Alstom_Coradia_LINT",
+            aliases = listOf("648", "1648", "2648"),
+        ),
+        TrainSeries(
+            baureihe = "624",
+            name = "ex VT 23/VT 24",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 80 + 55, // unknown but these are the ones produced
+            wikiArticleTitle = "DB-Baureihe_VT_24",
+            aliases = listOf("634"),
+        ),
+        TrainSeries(
+            baureihe = "626",
+            name = "NE 81",
+            category = "Triebzug",
+            vmaxKmh = 100,
+            fleetEstimate = 26,
+            wikiArticleTitle = "NE_81",
+            aliases = listOf("926"),
+        ),
+        TrainSeries(
+            baureihe = "627",
+            name = "Nebenbahn-Dieseltriebwagen",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 7, // others were already scrapped or burned down :(
+            wikiArticleTitle = "DB-Baureihe_627",
+            aliases = listOf("627.1"),
+        ),
+        TrainSeries(
+            baureihe = "628",
+            name = "Dieseltriebwagen 628",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 450,
+            wikiArticleTitle = "DB-Baureihe_628",
+            aliases = listOf("629", "628.0"),
+        ),
+        // non-existent
+        // TrainSeries(
+        //     baureihe = "631",
+        //     name = "Pesa Link I",
+        //     category = "Triebzug",
+        //     vmaxKmh = 140,
+        //     fleetEstimate = 18,
+        //     wikiArticleTitle = "Pesa_Link",
+        // ),
+        TrainSeries(
+            baureihe = "632",
+            name = "Pesa Link II",
+            category = "Triebzug",
+            vmaxKmh = 140,
+            fleetEstimate = 32,
+            wikiArticleTitle = "Pesa_Link",
+        ),
+        TrainSeries(
+            baureihe = "633",
+            name = "Pesa Link (dreiteilig)",
+            category = "Triebzug",
+            vmaxKmh = 140,
+            fleetEstimate = 30,
+            wikiArticleTitle = "Pesa_Link",
+        ),
+        TrainSeries(
+            baureihe = "640",
+            name = "Coradia LINT 27",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 47,
+            wikiArticleTitle = "Alstom_Coradia_LINT",
+        ),
+        TrainSeries(
+            baureihe = "641",
+            name = "Coradia A TER",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 40,
+            wikiArticleTitle = "Alstom_Coradia_A_TER",
+        ),
+        // 634 see 624
+        TrainSeries(
+            baureihe = "642",
+            name = "Siemens Desiro Classic",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 250,
+            wikiArticleTitle = "DB-Baureihe_642",
+        ),
+        TrainSeries(
+            baureihe = "643",
+            name = "Bombardier Talent (dieselmechanisch)",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 34 + 24,
+            wikiArticleTitle = "Bombardier_Talent",
+            aliases = listOf("943", "643.2"), // middle part, .2 are the 2 part ones
+        ),
+        TrainSeries(
+            baureihe = "644",
+            name = "Bombardier Talent (dieselelektrisch)",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 63,
+            wikiArticleTitle = "Bombardier_Talent",
+            aliases = listOf("944"), // middle part
+        ),
+        TrainSeries(
+            baureihe = "646",
+            name = "GTW 2/6",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 97,
+            wikiArticleTitle = "Stadler_GTW_1._Generation",
+        ),
+        TrainSeries(
+            baureihe = "650",
+            name = "Stadler Regio-Shuttle RS1",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 497,
+            wikiArticleTitle = "Stadler_Regio-Shuttle_RS_1",
+        ),
     )
 }
