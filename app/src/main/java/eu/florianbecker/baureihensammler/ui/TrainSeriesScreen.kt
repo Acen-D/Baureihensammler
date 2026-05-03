@@ -99,8 +99,6 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                 ?.imagePath
                 ?.takeIf { it.isNotBlank() }
         }
-    val hasCollectionPhoto = collectionSnapshotPath != null
-
     LaunchedEffect(Unit) {
         collection.clear()
         collection.addAll(loadCollection(context))
@@ -245,7 +243,6 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                             validSeries = validSeries,
                             overlapVehicleHint = overlapVehicleHint,
                             alreadyCollected = alreadyCollected,
-                            hasCollectionPhoto = hasCollectionPhoto,
                             collectionSnapshotPath = collectionSnapshotPath,
                             imeVisible = imeVisible,
                             blockExternalWikiSummaries = blockExternalWikiSummaries,
@@ -256,7 +253,8 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                                         CameraCaptureActivity.createIntent(
                                             context,
                                             series.baureihe,
-                                            series.origin
+                                            series.origin,
+                                            fromGallery = false,
                                         )
                                     takeSnapshotLauncher.launch(intent)
                                 } catch (t: Throwable) {
@@ -269,6 +267,32 @@ fun TrainSeriesScreen(modifier: Modifier = Modifier) {
                                     Toast.makeText(
                                         context,
                                         "Kamera konnte nicht gestartet werden.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            },
+                            onPickSnapshotFromGallery = {
+                                val series = validSeries ?: return@SearchView
+                                try {
+                                    val intent =
+                                        CameraCaptureActivity.createIntent(
+                                            context,
+                                            series.baureihe,
+                                            series.origin,
+                                            fromGallery = true,
+                                        )
+                                    takeSnapshotLauncher.launch(intent)
+                                } catch (t: Throwable) {
+                                    DebugLogStore.logError(
+                                        context = context,
+                                        source = "TrainSeriesScreen.onPickSnapshotFromGallery",
+                                        message =
+                                            "Galerie konnte nicht geöffnet werden (BR=${series.baureihe}).",
+                                        throwable = t
+                                    )
+                                    Toast.makeText(
+                                        context,
+                                        "Galerie konnte nicht geöffnet werden.",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }

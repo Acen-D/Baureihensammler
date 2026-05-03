@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -329,11 +330,11 @@ fun SearchView(
     validSeries: TrainSeries?,
     overlapVehicleHint: Boolean,
     alreadyCollected: Boolean,
-    hasCollectionPhoto: Boolean,
     collectionSnapshotPath: String?,
     imeVisible: Boolean,
     blockExternalWikiSummaries: Boolean,
     onTakeSnapshot: () -> Unit,
+    onPickSnapshotFromGallery: () -> Unit,
     onToggleCollected: () -> Unit,
     onOpenWiki: (String) -> Unit
 ) {
@@ -429,13 +430,27 @@ fun SearchView(
                         )
                     }
                     if (alreadyCollected) {
-                        OutlinedButton(onClick = onTakeSnapshot) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                Icon(Icons.Outlined.CameraAlt, contentDescription = null)
-                                Text(if (hasCollectionPhoto) "Ändern" else "Hinzufügen")
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            OutlinedButton(onClick = onTakeSnapshot) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    Icon(Icons.Outlined.CameraAlt, contentDescription = null)
+                                    Text("Kamera")
+                                }
+                            }
+                            OutlinedButton(onClick = onPickSnapshotFromGallery) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    Icon(Icons.Outlined.PhotoLibrary, contentDescription = null)
+                                    Text("Galerie")
+                                }
                             }
                         }
                     }

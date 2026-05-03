@@ -5,20 +5,28 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.Manifest
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.Button
@@ -45,6 +53,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.FileProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.canhub.cropper.CropImageView
 import eu.florianbecker.baureihensammler.data.TrainSeriesOrigin
 import eu.florianbecker.baureihensammler.ui.theme.BaureihensammlerTheme
@@ -56,11 +67,24 @@ class CameraCaptureActivity : ComponentActivity() {
 
     private lateinit var baureihe: String
     private lateinit var origin: TrainSeriesOrigin
+    private var captureSource: CaptureSource = CaptureSource.Camera
 
     private var captureUri: Uri? = null
 
     private val phase = mutableStateOf(Phase.RequestingPermission)
     private val cameraSessionId = mutableIntStateOf(0)
+    private val galleryPickSessionId = mutableIntStateOf(0)
+
+    private val pickVisualMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri == null) {
+                setResult(RESULT_CANCELED)
+                finish()
+            } else {
+                captureUri = uri
+                phase.value = Phase.Cropping
+            }
+        }
 
     private val takePicture =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
@@ -102,6 +126,16 @@ class CameraCaptureActivity : ComponentActivity() {
         try {
             baureihe = intent.getStringExtra(EXTRA_BAUREIHE) ?: ""
             origin = TrainSeriesOrigin.fromName(intent.getStringExtra(EXTRA_ORIGIN))
+            captureSource =
+                when (intent.getStringExtra(EXTRA_CAPTURE_SOURCE)) {
+                    CAPTURE_SOURCE_GALLERY -> CaptureSource.Gallery
+                    else -> CaptureSource.Camera
+                }
+            phase.value =
+                when (captureSource) {
+                    CaptureSource.Gallery -> Phase.LaunchingGalleryPicker
+                    CaptureSource.Camera -> Phase.RequestingPermission
+                }
         } catch (t: Throwable) {
             DebugLogStore.logError(
                 context = this,
@@ -115,10 +149,13 @@ class CameraCaptureActivity : ComponentActivity() {
             return
         }
 
+        hideSystemBars()
+
         setContent {
             BaureihensammlerTheme {
                 val currentPhase by phase
-                val session by cameraSessionId
+                val cameraSession by cameraSessionId
+                val gallerySession by galleryPickSessionId
                 when (currentPhase) {
                     Phase.RequestingPermission -> {
                         Box(
@@ -142,7 +179,7 @@ class CameraCaptureActivity : ComponentActivity() {
                         ) {
                             CircularProgressIndicator(color = Color.White)
                         }
-                        LaunchedEffect(session) {
+                        LaunchedEffect(cameraSession) {
                             try {
                                 val uri = prepareCaptureUri()
                                 takePicture.launch(uri)
@@ -163,19 +200,40 @@ class CameraCaptureActivity : ComponentActivity() {
                             }
                         }
                     }
+                    Phase.LaunchingGalleryPicker -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize().background(Color.Black),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(color = Color.White)
+                        }
+                        LaunchedEffect(gallerySession) {
+                            pickVisualMedia.launch(
+                                PickVisualMediaRequest(
+                                    ActivityResultContracts.PickVisualMedia.ImageOnly
+                                )
+                            )
+                        }
+                    }
                     Phase.Cropping -> {
                         val uri = captureUri
                         if (uri != null) {
                             CropReviewScreen(
                                 imageUri = uri,
                                 baureihe = baureihe,
+                                gallerySource = captureSource == CaptureSource.Gallery,
                                 onClose = {
                                     setResult(RESULT_CANCELED)
                                     finish()
                                 },
                                 onRetake = {
-                                    phase.value = Phase.LaunchingCamera
-                                    cameraSessionId.intValue++
+                                    if (captureSource == CaptureSource.Gallery) {
+                                        phase.value = Phase.LaunchingGalleryPicker
+                                        galleryPickSessionId.intValue++
+                                    } else {
+                                        phase.value = Phase.LaunchingCamera
+                                        cameraSessionId.intValue++
+                                    }
                                 },
                                 onCroppedBitmap = { bitmap -> saveCroppedAndFinish(bitmap) }
                             )
@@ -184,6 +242,37 @@ class CameraCaptureActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemBars()
+        }
+    }
+
+    override fun onDestroy() {
+        showSystemBars()
+        super.onDestroy()
+    }
+
+    private fun hideSystemBars() {
+        // AI says this is needed for backwards compatibility but I don't know if it even applied to the system requirements anyway...
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            window.attributes.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        }
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+    }
+
+    private fun showSystemBars() {
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.show(WindowInsetsCompat.Type.systemBars())
+        WindowCompat.setDecorFitsSystemWindows(window, true)
     }
 
     private fun prepareCaptureUri(): Uri {
@@ -240,22 +329,36 @@ class CameraCaptureActivity : ComponentActivity() {
         const val EXTRA_BAUREIHE = "extra_baureihe"
         const val EXTRA_IMAGE_PATH = "extra_image_path"
         const val EXTRA_ORIGIN = "extra_origin"
+        const val EXTRA_CAPTURE_SOURCE = "extra_capture_source"
+        const val CAPTURE_SOURCE_CAMERA = "camera"
+        const val CAPTURE_SOURCE_GALLERY = "gallery"
 
         fun createIntent(
             context: Context,
             baureihe: String,
-            origin: TrainSeriesOrigin = TrainSeriesOrigin.DB
+            origin: TrainSeriesOrigin = TrainSeriesOrigin.DB,
+            fromGallery: Boolean = false,
         ): Intent {
             return Intent(context, CameraCaptureActivity::class.java)
                 .putExtra(EXTRA_BAUREIHE, baureihe)
                 .putExtra(EXTRA_ORIGIN, origin.name)
+                .putExtra(
+                    EXTRA_CAPTURE_SOURCE,
+                    if (fromGallery) CAPTURE_SOURCE_GALLERY else CAPTURE_SOURCE_CAMERA
+                )
         }
     }
+}
+
+private enum class CaptureSource {
+    Camera,
+    Gallery,
 }
 
 private enum class Phase {
     RequestingPermission,
     LaunchingCamera,
+    LaunchingGalleryPicker,
     Cropping,
 }
 
@@ -263,6 +366,7 @@ private enum class Phase {
 private fun CropReviewScreen(
     imageUri: Uri,
     baureihe: String,
+    gallerySource: Boolean,
     onClose: () -> Unit,
     onRetake: () -> Unit,
     onCroppedBitmap: (Bitmap) -> Unit,
@@ -301,7 +405,14 @@ private fun CropReviewScreen(
 
         IconButton(
             onClick = onClose,
-            modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
+            modifier =
+                Modifier.align(Alignment.TopStart)
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Horizontal + WindowInsetsSides.Top
+                        )
+                    )
+                    .padding(8.dp)
         ) {
             Icon(
                 Icons.Outlined.Close,
@@ -314,13 +425,25 @@ private fun CropReviewScreen(
             "BR $baureihe — 16:9 zuschneiden",
             color = Color.White,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.align(Alignment.TopCenter).padding(top = 48.dp)
+            modifier =
+                Modifier.align(Alignment.TopCenter)
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Horizontal + WindowInsetsSides.Top
+                        )
+                    )
+                    .padding(top = 8.dp)
         )
 
         Row(
             modifier =
                 Modifier.align(Alignment.BottomCenter)
                     .fillMaxWidth()
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
+                        )
+                    )
                     .padding(horizontal = 16.dp, vertical = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -335,7 +458,7 @@ private fun CropReviewScreen(
                         disabledContentColor = Color.White.copy(alpha = 0.4f)
                     )
             ) {
-                Text("Neu aufnehmen")
+                Text(if (gallerySource) "Anderes wählen" else "Neu aufnehmen")
             }
             Button(
                 onClick = {
