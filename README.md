@@ -45,7 +45,7 @@ Android app for collecting train classes ("Baureihen"), tracking discoveries, an
 ### Prerequisites
 
 - Android Studio (recent stable)
-- JDK 11 (project is configured for Java 11 compatibility)
+- JDK 11
 - Android SDK platform 36 installed
 
 ### Run from Android Studio
