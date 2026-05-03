@@ -93,11 +93,31 @@ object AlphaTrainSeriesRepository {
         // Elektrisch
         TrainSeries("101", "InterCity Ellok", "Lokomotive", 220, 145, "DB-Baureihe_101"),
         TrainSeries("102", "Skoda 109E", "Elektrolokomotive", 200, 20, "DB-Baureihe_102"),
-        TrainSeries("105", "Talgo Travca", "Elektrolokomotive", 230, 23, "DB-Baureihe_105"),
-        TrainSeries("111", "ex DB E 41", "Elektrolokomotive", 160, 160, "DB-Baureihe_111"),
-        TrainSeries("112", "ex DR/DB 112.1", "Elektrolokomotive", 160, 90, "DB-Baureihe_112"),
-        TrainSeries("114", "ex DR 212.0", "Elektrolokomotive", 160, 40, "DB-Baureihe_114"),
-        TrainSeries("143", "ex DR 243", "Elektrolokomotive", 120, 300, "DB-Baureihe_143"),
+        TrainSeries("103", "Schnellzug-Ellok", "Elektrolokomotive", 200, 5, "DB-Baureihe_103"),
+        TrainSeries("104", "ex DR E 04", "Elektrolokomotive", 130, 1, "DR-Baureihe_E_04"),
+        TrainSeries("105", "Talgo Travca", "Elektrolokomotive", 230, 60, "DB-Baureihe_105"),
+        TrainSeries("109", "ex DR E 11", "Elektrolokomotive", 120, 7, "DB-Baureihe_109"),
+        TrainSeries("110", "ex DB E 10", "Elektrolokomotive", 140, 20, "DB-Baureihe_E_10", aliases = listOf("115")),
+        TrainSeries("111", "ex DB E 41", "Elektrolokomotive", 160, 61, "DB-Baureihe_111"),
+
+        TrainSeries("112", "ex DR/DB 112.1", "Elektrolokomotive", 160, 90, "DB-Baureihe_112", overlapVehicleRanges = listOf(1..199)),
+        TrainSeries("112", "ex Baureihe E 10 ", "Elektrolokomotive", 160, 26, "DB-Baureihe_E_10#Baureihe_E_10.12/Baureihe_112", overlapVehicleRanges = listOf(200..299)),
+
+
+        TrainSeries("113", "ex Baureihe E 10", "Elektrolokomotive", 160, 3, "DB-Baureihe_E_10#Baureihe_113"),
+
+
+        TrainSeries("114", "DB BR 114.0 (ex Baureihe 112.0)", "Elektrolokomotive", 160, 500, "DR-Baureihe_243#DB-Baureihe_114.0", aliases = listOf("114.0", "114.1", "114.3", "143"), overlapVehicleRanges = listOf(1..484, 505..999)),
+        TrainSeries("114", "ex Baureihe E 10 ", "Elektrolokomotive", 160, 20, "DB-Baureihe_E_10#Baureihe_E_10.12/Baureihe_114", overlapVehicleRanges = listOf(485..504)),
+
+        TrainSeries("115", "ex Baureihe E 10", "Elektrolokomotive", 160, 1, "DB-Baureihe_E_10#Baureihe_115"),
+
+
+        TrainSeries("139", "ex DB E 40.11", "Elektrolokomotive", 120, 47, "DB-Baureihe_E_40#Baureihe_E_40.11_bzw._139"),
+        TrainSeries("140", "ex DB E 40 (Einheitselektrolok)", "Elektrolokomotive", 120, 848, "DB-Baureihe_E_40"),
+        TrainSeries("141", "ex DB E 41", "Elektrolokomotive", 120, 11, "DB-Baureihe_E_41"),
+        TrainSeries("142", "ex DR E 42", "Elektrolokomotive", 100, 4, "DR-Baureihe_E_42"),
+
         TrainSeries("146.0", "Bombardier Traxx", "Elektrolokomotive", 160, 142, "Bombardier_Traxx", aliases = listOf("145")),
         TrainSeries("146.1", "Bombardier Traxx P160 AC1", "Elektrolokomotive", 160, 32, "Bombardier_Traxx"),
         TrainSeries(
@@ -118,6 +138,8 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 130,
             wikiArticleTitle = "Bombardier_Traxx",
         ),
+        TrainSeries("150", "ex DB E 50", "Elektrolokomotive", 100, 2, "DB-Baureihe_E_50"),
+        TrainSeries("151", "Schwere Güterzug-Ellok", "Elektrolokomotive", 120, 150, "DB-Baureihe_151"),
         TrainSeries("152", "Güterzug-Ellok", "Lokomotive", 140, 195, "DB-Baureihe_152"),
         TrainSeries("182", "Siemens ES64U2 Taurus", "Elektrolokomotive", 230, 30, "DB-Baureihe_182"),
         TrainSeries(
@@ -139,7 +161,6 @@ object AlphaTrainSeriesRepository {
             wikiArticleTitle = "Bombardier_Traxx",
             aliases = listOf("186.1"),
         ),
-        TrainSeries("189", "Siemens ES64F4", "Elektrolokomotive", 140, 100, "DB-Baureihe_189"),
         TrainSeries("185", "TRAXX F140 AC", "Lokomotive", 140, 370, "Bombardier_Traxx"),
         TrainSeries(
             baureihe = "187",
@@ -149,8 +170,9 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 350,
             wikiArticleTitle = "Bombardier_Traxx",
             aliases = listOf("187.0"),
-        ),
+            ),
         TrainSeries("188", "Traxx F160 MS3", "Lokomotive", 160, 20, "Bombardier_Traxx"),
+        TrainSeries("189", "Siemens ES64F4", "Elektrolokomotive", 140, 100, "DB-Baureihe_189"),
         TrainSeries("193", "Vectron", "Lokomotive", 160, 160, "DB-Baureihe_193"),
 
         // Diesel / Hybrid / Zweikraft / Kleinlok (nach Baureihe sortiert)
