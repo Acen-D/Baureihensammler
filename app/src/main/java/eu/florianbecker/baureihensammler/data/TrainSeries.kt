@@ -213,7 +213,7 @@ object AlphaTrainSeriesRepository {
         TrainSeries("407", "Velaro D", "Triebzug", 320, 17, "DB-Baureihe_407"),
         TrainSeries("408", "ICE 3neo", "Triebzug", 320, 90, "DB-Baureihe_408"),
         TrainSeries("411", "ICE T (7-teilig)", "Triebzug", 230, 60, "DB-Baureihe_411"),
-        TrainSeries("412", "ICE 4", "Triebzug", 250, 130, "DB-Baureihe_412"),
+        TrainSeries("412", "ICE 4", "Triebzug", 250, 130, "DB-Baureihe_412", aliases = listOf("812")),
         TrainSeries("415", "ICE T (5-teilig)", "Triebzug", 230, 11, "DB-Baureihe_415"),
         TrainSeries("420", "S-Bahn ET 420", "Triebzug", 120, 80, "DB-Baureihe_420"),
         TrainSeries("421", "S-Bahn ET 421", "Triebzug", 120, 30, "DB-Baureihe_420"),
