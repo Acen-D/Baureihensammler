@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import eu.florianbecker.baureihensammler.data.AlphaTrainSeriesRepository
 import eu.florianbecker.baureihensammler.ui.TrainSeriesScreen
 import eu.florianbecker.baureihensammler.ui.theme.BaureihensammlerTheme
 import eu.florianbecker.baureihensammler.util.DebugLogStore
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DebugLogStore.resetForNewAppSession(this)
+        AlphaTrainSeriesRepository.initialize(this)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         enableEdgeToEdge()
         setContent {
