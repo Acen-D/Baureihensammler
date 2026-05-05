@@ -1140,6 +1140,7 @@
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null
   },
+  // Elektrische Triebzüge
   {
     "baureihe": "401",
     "name": "ICE 1",
@@ -1356,8 +1357,8 @@
     "name": "Siemens Desiro Classic",
     "category": "Triebzug",
     "vmaxKmh": 120,
-    "fleetEstimate": 500,
-    "wikiArticleTitle": "Siemens_Desiro_Classic",
+    "fleetEstimate": 250,
+    "wikiArticleTitle": "DB-Baureihe_642",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -1381,6 +1382,7 @@
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null
   },
+  // TODO: Find fix for DR ET 25 (DB BR 425)
   {
     "baureihe": "425 (1999)",
     "name": "DB-Baureihe 425",
@@ -1561,13 +1563,14 @@
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null
   },
+  // Dieseltriebwagen
   {
     "baureihe": "605",
     "name": "ICE TD",
     "category": "Triebzug",
     "vmaxKmh": 200,
     "fleetEstimate": 6,
-    "wikiArticleTitle": null,
+    "wikiArticleTitle": "DB-Baureihe_605",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -1649,11 +1652,28 @@
   },
   {
     "baureihe": "628",
-    "name": "628",
+    "name": "Dieseltriebwagen 628",
+    "category": "Triebzug",
+    "vmaxKmh": 120,
+    "fleetEstimate": 450,
+    "wikiArticleTitle": "DB-Baureihe_628",
+    "origin": "DB",
+    "aliases": [
+      "629",
+      "628.0"
+    ],
+    "overlapGroupKey": null,
+    "overlapVehicleRanges": [],
+    "overlapVehicleDigits": null
+  },
+  // non-existent in DB schema: 631
+  {
+    "baureihe": "632",
+    "name": "Pesa Link II",
     "category": "Triebzug",
     "vmaxKmh": 140,
-    "fleetEstimate": 309,
-    "wikiArticleTitle": "DB-Baureihe_628",
+    "fleetEstimate": 32,
+    "wikiArticleTitle": "Pesa_Link",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -1661,28 +1681,25 @@
     "overlapVehicleDigits": null
   },
   {
-    "baureihe": "631",
-    "name": "PESA LINK",
+    "baureihe": "633",
+    "name": "Pesa Link (dreiteilig)",
     "category": "Triebzug",
     "vmaxKmh": 140,
-    "fleetEstimate": 80,
+    "fleetEstimate": 30,
     "wikiArticleTitle": "Pesa_Link",
     "origin": "DB",
-    "aliases": [
-      "632",
-      "633"
-    ],
+    "aliases": [],
     "overlapGroupKey": null,
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null
   },
   {
     "baureihe": "640",
-    "name": "Alstom Coradia LINT 27",
+    "name": "Coradia LINT 27",
     "category": "Triebzug",
     "vmaxKmh": 120,
-    "fleetEstimate": 309,
-    "wikiArticleTitle": "Alstom_Coradia_LINT#LINT_27",
+    "fleetEstimate": 47,
+    "wikiArticleTitle": "Alstom_Coradia_LINT",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -1691,11 +1708,11 @@
   },
   {
     "baureihe": "641",
-    "name": "Alstom Coradia A TER",
+    "name": "Coradia A TER",
     "category": "Triebzug",
     "vmaxKmh": 120,
     "fleetEstimate": 40,
-    "wikiArticleTitle": "Alstom_Coradia_LINT#LINT_27",
+    "wikiArticleTitle": "Alstom_Coradia_A_TER",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -1704,13 +1721,31 @@
   },
   {
     "baureihe": "643",
-    "name": "Siemens Bombardier Talent",
+    "name": "Bombardier Talent (dieselmechanisch)",
     "category": "Triebzug",
     "vmaxKmh": 120,
-    "fleetEstimate": 780,
+    "fleetEstimate": 58,
     "wikiArticleTitle": "Bombardier_Talent",
     "origin": "DB",
-    "aliases": [],
+    "aliases": [
+      "943",
+      "643.2"
+    ],
+    "overlapGroupKey": null,
+    "overlapVehicleRanges": [],
+    "overlapVehicleDigits": null
+  },
+  {
+    "baureihe": "644",
+    "name": "Bombardier Talent (dieselelektrisch)",
+    "category": "Triebzug",
+    "vmaxKmh": 120,
+    "fleetEstimate": 63,
+    "wikiArticleTitle": "Bombardier_Talent",
+    "origin": "DB",
+    "aliases": [
+      "944"
+    ],
     "overlapGroupKey": null,
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null
@@ -1720,7 +1755,7 @@
     "name": "GTW 2/6",
     "category": "Triebzug",
     "vmaxKmh": 120,
-    "fleetEstimate": 40,
+    "fleetEstimate": 97,
     "wikiArticleTitle": "Stadler_GTW_1._Generation",
     "origin": "DB",
     "aliases": [],
@@ -2202,7 +2237,7 @@
     "category": "Triebzug",
     "vmaxKmh": 160,
     "fleetEstimate": 2,
-    "wikiArticleTitle": null,
+    "wikiArticleTitle": "DB-Baureihe_610",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -2215,7 +2250,7 @@
     "category": "Triebzug",
     "vmaxKmh": 160,
     "fleetEstimate": 4,
-    "wikiArticleTitle": null,
+    "wikiArticleTitle": "DB-Baureihe_611",
     "origin": "DB",
     "aliases": [],
     "overlapGroupKey": null,
@@ -2228,7 +2263,7 @@
     "category": "Triebzug",
     "vmaxKmh": 140,
     "fleetEstimate": 5,
-    "wikiArticleTitle": null,
+    "wikiArticleTitle": "DB-Baureihe_614",
     "origin": "DB",
     "aliases": [
       "914"
@@ -2242,8 +2277,8 @@
     "name": "ex VT 23/VT 24",
     "category": "Triebzug",
     "vmaxKmh": 120,
-    "fleetEstimate": "80 + 55",
-    "wikiArticleTitle": null,
+    "fleetEstimate": 135,
+    "wikiArticleTitle": "DB-Baureihe_VT_24",
     "origin": "DB",
     "aliases": [
       "634"
@@ -2258,9 +2293,11 @@
     "category": "Triebzug",
     "vmaxKmh": 120,
     "fleetEstimate": 7,
-    "wikiArticleTitle": null,
+    "wikiArticleTitle": "DB-Baureihe_627",
     "origin": "DB",
-    "aliases": [],
+    "aliases": [
+      "627.1"
+    ],
     "overlapGroupKey": null,
     "overlapVehicleRanges": [],
     "overlapVehicleDigits": null

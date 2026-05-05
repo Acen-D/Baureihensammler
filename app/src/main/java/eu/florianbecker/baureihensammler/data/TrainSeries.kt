@@ -7,6 +7,7 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
+import org.hjson.JsonValue
 import java.lang.reflect.Type
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -118,11 +119,14 @@ object AlphaTrainSeriesRepository {
         val gson = GsonBuilder()
             .registerTypeAdapter(IntRange::class.java, IntRangeDeserializer())
             .create()
-        
-        val jsonString = context.assets.open("train_series.json").bufferedReader().use {
+
+        val hjsonString = context.assets.open("train_series.hjson").bufferedReader().use {
             it.readText()
         }
-        
+
+        // Parse lenient Hjson and convert to strict JSON for Gson mapping.
+        val jsonString = JsonValue.readHjson(hjsonString).toString()
+
         val type = object : TypeToken<List<TrainSeries>>() {}.type
         return gson.fromJson(jsonString, type)
     }
