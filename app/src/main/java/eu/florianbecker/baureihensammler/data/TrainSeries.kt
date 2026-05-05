@@ -74,50 +74,30 @@ private fun encodeForWiki(value: String): String {
 object AlphaTrainSeriesRepository {
     val items: List<TrainSeries> = listOf(
         // Dampf
-        TrainSeries("003 204", "ex DR 03", "Dampflokomotive", 130, 1, "DR-Baureihe_03", aliases = listOf("003", "03")),
-        TrainSeries("041 231", "ex DR 41", "Dampflokomotive", 90, 1, "DR-Baureihe_41", aliases = listOf("41")),
-        TrainSeries("044", "ex DR 44", "Dampflokomotive", 80, 2, "DR-Baureihe_44", aliases = listOf("44")),
-        TrainSeries("050", "ex DR 50", "Dampflokomotive", 80, 11, "DR-Baureihe_50", aliases = listOf("50")),
-        TrainSeries("052", "ex DR 52", "Dampflokomotive", 80, 21, "DR-Baureihe_52", aliases = listOf("52")),
-        TrainSeries("065", "ex DR 65.10", "Dampflokomotive", 90, 1, "DR-Baureihe_65.10", aliases = listOf("65")),
-        TrainSeries("099", "Sachsische IV K", "Dampflokomotive", 30, 5, "DR-Baureihe_99.51-60", overlapVehicleRanges = listOf(701..713)),
-        TrainSeries("099", "Sachsische VI K", "Dampflokomotive", 30, 1, "DR-Baureihe_99.67-71", overlapVehicleRanges = listOf(720..720)),
-        TrainSeries("099", "ex DR 99.73-76", "Dampflokomotive", 30, 14, "DR-Baureihe_99.73-76", overlapVehicleRanges = listOf(722..735)),
-        TrainSeries("099", "ex DR 99.77-79", "Dampflokomotive", 30, 21, "DR-Baureihe_99.77-79", overlapVehicleRanges = listOf(736..757)),
-        TrainSeries("099", "Trusetal", "Dampflokomotive", 25, 1, "TB_Glückauf_und_Trusetal", overlapVehicleRanges = listOf(760..760)),
-        TrainSeries("099", "ex RukB Mh", "Dampflokomotive", 30, 2, "Lenz-Typ_M", overlapVehicleRanges = listOf(770..771)),
-        TrainSeries("099", "ex KJI 20/21", "Dampflokomotive", 45, 2, "KJI_Nr._20_und_21", overlapVehicleRanges = listOf(780..781)),
-        TrainSeries("099", "ex DR 99.32", "Dampflokomotive", 50, 3, "DR-Baureihe_99.32", overlapVehicleRanges = listOf(901..903)),
-        TrainSeries("099", "LKM 225 PS Schmalspur", "Dampflokomotive", 35, 2, "DR-Baureihe_99.33", overlapVehicleRanges = listOf(904..905)),
+        TrainSeries("003 204", "ex DR 03", "Dampflokomotive", 130, 1, "DR-Baureihe_03"),
+        TrainSeries("041 231", "ex DR 41", "Dampflokomotive", 90, 1, "DR-Baureihe_41"),
+        TrainSeries("044", "ex DR 44", "Dampflokomotive", 80, 2, "DR-Baureihe_44"),
+        TrainSeries("050", "ex DR 50", "Dampflokomotive", 80, 11, "DR-Baureihe_50"),
+        TrainSeries("052", "ex DR 52", "Dampflokomotive", 80, 21, "DR-Baureihe_52"),
+        TrainSeries("065 008", "ex DR 65.10", "Dampflokomotive", 90, 1, "DR-Baureihe_65.10"),
+        TrainSeries("099 701", "Sachsische IV K", "Dampflokomotive", 30, 5, "DR-Baureihe_99.51-60"),
+        TrainSeries("099 720", "Sachsische VI K", "Dampflokomotive", 30, 1, "DR-Baureihe_99.67-71"),
+        TrainSeries("099 722", "ex DR 99.73-76", "Dampflokomotive", 30, 14, "DR-Baureihe_99.73-76"),
+        TrainSeries("099 736", "ex DR 99.77-79", "Dampflokomotive", 30, 21, "DR-Baureihe_99.77-79"),
+        TrainSeries("099 760", "Trusetal", "Dampflokomotive", 25, 1, "Trusetalbahn"),
+        TrainSeries("099 770", "ex RukB Mh", "Dampflokomotive", 30, 2, "Rügensche_Bäderbahn"),
+        TrainSeries("099 780", "ex KJI 20/21", "Dampflokomotive", 45, 2, "Baureihe_099"),
+        TrainSeries("099 901", "ex DR 99.32", "Dampflokomotive", 50, 3, "DR-Baureihe_99.32"),
+        TrainSeries("099 904", "LKM 225 PS Schmalspur", "Dampflokomotive", 35, 2, "DR-Baureihe_99.33"),
 
         // Elektrisch
         TrainSeries("101", "InterCity Ellok", "Lokomotive", 220, 145, "DB-Baureihe_101"),
         TrainSeries("102", "Skoda 109E", "Elektrolokomotive", 200, 20, "DB-Baureihe_102"),
-        TrainSeries("103", "Schnellzug-Ellok", "Elektrolokomotive", 200, 5, "DB-Baureihe_103"),
-        TrainSeries("104", "ex DR E 04", "Elektrolokomotive", 130, 1, "DR-Baureihe_E_04"),
-        TrainSeries("105", "Talgo Travca", "Elektrolokomotive", 230, 60, "DB-Baureihe_105"),
-        TrainSeries("109", "ex DR E 11", "Elektrolokomotive", 120, 7, "DB-Baureihe_109"),
-        TrainSeries("110", "ex DB E 10", "Elektrolokomotive", 140, 20, "DB-Baureihe_E_10", aliases = listOf("115")),
-        TrainSeries("111", "ex DB E 41", "Elektrolokomotive", 160, 61, "DB-Baureihe_111"),
-
-        TrainSeries("112", "ex DR/DB 112.1", "Elektrolokomotive", 160, 90, "DB-Baureihe_112", overlapVehicleRanges = listOf(1..199)),
-        TrainSeries("112", "ex Baureihe E 10 ", "Elektrolokomotive", 160, 26, "DB-Baureihe_E_10#Baureihe_E_10.12/Baureihe_112", overlapVehicleRanges = listOf(200..299)),
-
-
-        TrainSeries("113", "ex Baureihe E 10", "Elektrolokomotive", 160, 3, "DB-Baureihe_E_10#Baureihe_113"),
-
-
-        TrainSeries("114", "DB BR 114.0 (ex Baureihe 112.0)", "Elektrolokomotive", 160, 500, "DR-Baureihe_243#DB-Baureihe_114.0", aliases = listOf("114.0", "114.1", "114.3", "143"), overlapVehicleRanges = listOf(1..484, 505..999)),
-        TrainSeries("114", "ex Baureihe E 10 ", "Elektrolokomotive", 160, 20, "DB-Baureihe_E_10#Baureihe_E_10.12/Baureihe_114", overlapVehicleRanges = listOf(485..504)),
-
-        TrainSeries("115", "ex Baureihe E 10", "Elektrolokomotive", 160, 1, "DB-Baureihe_E_10#Baureihe_115"),
-
-
-        TrainSeries("139", "ex DB E 40.11", "Elektrolokomotive", 120, 47, "DB-Baureihe_E_40#Baureihe_E_40.11_bzw._139"),
-        TrainSeries("140", "ex DB E 40 (Einheitselektrolok)", "Elektrolokomotive", 120, 848, "DB-Baureihe_E_40"),
-        TrainSeries("141", "ex DB E 41", "Elektrolokomotive", 120, 11, "DB-Baureihe_E_41"),
-        TrainSeries("142", "ex DR E 42", "Elektrolokomotive", 100, 4, "DR-Baureihe_E_42"),
-
+        TrainSeries("105", "Talgo Travca", "Elektrolokomotive", 230, 23, "DB-Baureihe_105"),
+        TrainSeries("111", "ex DB E 41", "Elektrolokomotive", 160, 160, "DB-Baureihe_111"),
+        TrainSeries("112", "ex DR/DB 112.1", "Elektrolokomotive", 160, 90, "DB-Baureihe_112"),
+        TrainSeries("114", "ex DR 212.0", "Elektrolokomotive", 160, 40, "DB-Baureihe_114"),
+        TrainSeries("143", "ex DR 243", "Elektrolokomotive", 120, 300, "DB-Baureihe_143"),
         TrainSeries("146.0", "Bombardier Traxx", "Elektrolokomotive", 160, 142, "Bombardier_Traxx", aliases = listOf("145")),
         TrainSeries("146.1", "Bombardier Traxx P160 AC1", "Elektrolokomotive", 160, 32, "Bombardier_Traxx"),
         TrainSeries(
@@ -138,8 +118,6 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 130,
             wikiArticleTitle = "Bombardier_Traxx",
         ),
-        TrainSeries("150", "ex DB E 50", "Elektrolokomotive", 100, 2, "DB-Baureihe_E_50"),
-        TrainSeries("151", "Schwere Güterzug-Ellok", "Elektrolokomotive", 120, 150, "DB-Baureihe_151"),
         TrainSeries("152", "Güterzug-Ellok", "Lokomotive", 140, 195, "DB-Baureihe_152"),
         TrainSeries("182", "Siemens ES64U2 Taurus", "Elektrolokomotive", 230, 30, "DB-Baureihe_182"),
         TrainSeries(
@@ -161,6 +139,7 @@ object AlphaTrainSeriesRepository {
             wikiArticleTitle = "Bombardier_Traxx",
             aliases = listOf("186.1"),
         ),
+        TrainSeries("189", "Siemens ES64F4", "Elektrolokomotive", 140, 100, "DB-Baureihe_189"),
         TrainSeries("185", "TRAXX F140 AC", "Lokomotive", 140, 370, "Bombardier_Traxx"),
         TrainSeries(
             baureihe = "187",
@@ -170,9 +149,8 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 350,
             wikiArticleTitle = "Bombardier_Traxx",
             aliases = listOf("187.0"),
-            ),
+        ),
         TrainSeries("188", "Traxx F160 MS3", "Lokomotive", 160, 20, "Bombardier_Traxx"),
-        TrainSeries("189", "Siemens ES64F4", "Elektrolokomotive", 140, 100, "DB-Baureihe_189"),
         TrainSeries("193", "Vectron", "Lokomotive", 160, 160, "DB-Baureihe_193"),
 
         // Diesel / Hybrid / Zweikraft / Kleinlok (nach Baureihe sortiert)
@@ -221,15 +199,13 @@ object AlphaTrainSeriesRepository {
         TrainSeries("364", "Umbau aus 360", "Kleinlok", 60, 90, "DB-Baureihe_360"),
         TrainSeries("365", "Umbau aus 361", "Kleinlok", 60, 70, "DB-Baureihe_365"),
         TrainSeries("383", "ex LEW EL 16", "Kleinlok", 6, 20, "LEW_EL_16"),
-        
-        TrainSeries("399", "schmalspurige Kleinlokomotiven", "Kleinlok", 20, 10, "DB-Baureihe_399"),
-
-        
+        TrainSeries("399 105", "Wangerooge L18H", "Kleinlok", 20, 2, "DB-Baureihe_399"),
+        TrainSeries("399 107", "Wangerooge Schoma", "Kleinlok", 20, 2, "DB-Baureihe_399"),
         TrainSeries("4125", "Vossloh DE 12", "Diesellokomotive", 120, 20, "Vossloh_DE_12"),
         TrainSeries("4185", "Vossloh DE 18", "Diesellokomotive", 120, 20, "Vossloh_DE_18"),
+        //TrainSeries("650", "Vossloh G6", "Kleinlok", 80, 50, "DB-Baureihe_650"), // This is not BR 650, rather 0650 or 0279
 
-
-        // Elektrische Triebzüge
+        // Triebzüge Elektrisch
         TrainSeries("401", "ICE 1", "Triebzug", 280, 59, "DB-Baureihe_401"),
         TrainSeries("402", "ICE 2", "Triebzug", 280, 44, "DB-Baureihe_402"),
         TrainSeries("403", "ICE 3", "Triebzug", 330, 67, "DB-Baureihe_403_(1997)"),
@@ -237,7 +213,7 @@ object AlphaTrainSeriesRepository {
         TrainSeries("407", "Velaro D", "Triebzug", 320, 17, "DB-Baureihe_407"),
         TrainSeries("408", "ICE 3neo", "Triebzug", 320, 90, "DB-Baureihe_408"),
         TrainSeries("411", "ICE T (7-teilig)", "Triebzug", 230, 60, "DB-Baureihe_411"),
-        TrainSeries("412", "ICE 4", "Triebzug", 250, 130, "DB-Baureihe_412", aliases = listOf("812")),
+        TrainSeries("412", "ICE 4", "Triebzug", 250, 130, "DB-Baureihe_412"),
         TrainSeries("415", "ICE T (5-teilig)", "Triebzug", 230, 11, "DB-Baureihe_415"),
         TrainSeries("420", "S-Bahn ET 420", "Triebzug", 120, 80, "DB-Baureihe_420"),
         TrainSeries("421", "S-Bahn ET 421", "Triebzug", 120, 30, "DB-Baureihe_420"),
@@ -276,6 +252,14 @@ object AlphaTrainSeriesRepository {
             fleetEstimate = 106,
             wikiArticleTitle = "DB-Baureihe_483/484",
             aliases = listOf("0483", "484", "0484"),
+        ),
+        TrainSeries(
+            baureihe = "642",
+            name = "Siemens Desiro Classic",
+            category = "Triebzug",
+            vmaxKmh = 120,
+            fleetEstimate = 250,
+            wikiArticleTitle = "DB-Baureihe_642",
         ),
         TrainSeries(
             baureihe = "1462",
@@ -370,194 +354,24 @@ object AlphaTrainSeriesRepository {
         TrainSeries("447", "Alstom Coradia Max", "Triebzug", 160, 20, "Alstom_Coradia_Max"),
         TrainSeries("463", "Mireo", "Triebzug", 160, 90, "Siemens_Mireo"),
 
-
-        // Dieseltriebwagen
-        TrainSeries(
-            baureihe = "605",
-            name = "ICE TD",
-            category = "Triebzug",
-            vmaxKmh = 200,
-            fleetEstimate = 6, // others were already scrapped
-            wikiArticleTitle = "DB-Baureihe_605",
-        ),
-        TrainSeries(
-            baureihe = "610",
-            name = "Diesel-Pendolino",
-            category = "Triebzug",
-            vmaxKmh = 160,
-            fleetEstimate = 2, // others were already scrapped
-            wikiArticleTitle = "DB-Baureihe_610",
-        ),
-        TrainSeries(
-            baureihe = "611",
-            name = "Neigetechnik-Triebzug",
-            category = "Triebzug",
-            vmaxKmh = 160,
-            fleetEstimate = 4, // others were already scrapped
-            wikiArticleTitle = "DB-Baureihe_611",
-        ),
-        TrainSeries(
-            baureihe = "612",
-            name = "RegioSwinger",
-            category = "Triebzug",
-            vmaxKmh = 160,
-            fleetEstimate = 192,
-            wikiArticleTitle = "DB-Baureihe_612_(1998)",
-        ),
-        TrainSeries(
-            baureihe = "614",
-            name = "Dieseltriebzug 614/914",
-            category = "Triebzug",
-            vmaxKmh = 140,
-            fleetEstimate = 5, // others were already scrapped
-            wikiArticleTitle = "DB-Baureihe_614",
-            aliases = listOf("914"),
-        ),
-        TrainSeries(
-            baureihe = "620",
-            name = "Coradia LINT 81",
-            category = "Triebzug",
-            vmaxKmh = 160,
-            fleetEstimate = 45,
-            wikiArticleTitle = "Alstom_Coradia_LINT",
-        ),
-        TrainSeries(
-            baureihe = "622",
-            name = "Coradia LINT 54",
-            category = "Triebzug",
-            vmaxKmh = 140,
-            fleetEstimate = 70,
-            wikiArticleTitle = "Alstom_Coradia_LINT",
-            aliases = listOf("1622"),
-        ),
-        TrainSeries(
-            baureihe = "623",
-            name = "Coradia LINT 41",
-            category = "Triebzug",
-            vmaxKmh = 140,
-            fleetEstimate = 714,
-            wikiArticleTitle = "Alstom_Coradia_LINT",
-            aliases = listOf("648", "1648", "2648"),
-        ),
-        TrainSeries(
-            baureihe = "624",
-            name = "ex VT 23/VT 24",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 80 + 55, // unknown but these are the ones produced
-            wikiArticleTitle = "DB-Baureihe_VT_24",
-            aliases = listOf("634"),
-        ),
-        TrainSeries(
-            baureihe = "626",
-            name = "NE 81",
-            category = "Triebzug",
-            vmaxKmh = 100,
-            fleetEstimate = 26,
-            wikiArticleTitle = "NE_81",
-            aliases = listOf("926"),
-        ),
-        TrainSeries(
-            baureihe = "627",
-            name = "Nebenbahn-Dieseltriebwagen",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 7, // others were already scrapped or burned down :(
-            wikiArticleTitle = "DB-Baureihe_627",
-            aliases = listOf("627.1"),
-        ),
-        TrainSeries(
-            baureihe = "628",
-            name = "Dieseltriebwagen 628",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 450,
-            wikiArticleTitle = "DB-Baureihe_628",
-            aliases = listOf("629", "628.0"),
-        ),
-        // non-existent
-        // TrainSeries(
-        //     baureihe = "631",
-        //     name = "Pesa Link I",
-        //     category = "Triebzug",
-        //     vmaxKmh = 140,
-        //     fleetEstimate = 18,
-        //     wikiArticleTitle = "Pesa_Link",
-        // ),
-        TrainSeries(
-            baureihe = "632",
-            name = "Pesa Link II",
-            category = "Triebzug",
-            vmaxKmh = 140,
-            fleetEstimate = 32,
-            wikiArticleTitle = "Pesa_Link",
-        ),
-        TrainSeries(
-            baureihe = "633",
-            name = "Pesa Link (dreiteilig)",
-            category = "Triebzug",
-            vmaxKmh = 140,
-            fleetEstimate = 30,
-            wikiArticleTitle = "Pesa_Link",
-        ),
-        TrainSeries(
-            baureihe = "640",
-            name = "Coradia LINT 27",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 47,
-            wikiArticleTitle = "Alstom_Coradia_LINT",
-        ),
-        TrainSeries(
-            baureihe = "641",
-            name = "Coradia A TER",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 40,
-            wikiArticleTitle = "Alstom_Coradia_A_TER",
-        ),
-        // 634 see 624
-        TrainSeries(
-            baureihe = "642",
-            name = "Siemens Desiro Classic",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 250,
-            wikiArticleTitle = "DB-Baureihe_642",
-        ),
-        TrainSeries(
-            baureihe = "643",
-            name = "Bombardier Talent (dieselmechanisch)",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 34 + 24,
-            wikiArticleTitle = "Bombardier_Talent",
-            aliases = listOf("943", "643.2"), // middle part, .2 are the 2 part ones
-        ),
-        TrainSeries(
-            baureihe = "644",
-            name = "Bombardier Talent (dieselelektrisch)",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 63,
-            wikiArticleTitle = "Bombardier_Talent",
-            aliases = listOf("944"), // middle part
-        ),
-        TrainSeries(
-            baureihe = "646",
-            name = "GTW 2/6",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 97,
-            wikiArticleTitle = "Stadler_GTW_1._Generation",
-        ),
-        TrainSeries(
-            baureihe = "650",
-            name = "Stadler Regio-Shuttle RS1",
-            category = "Triebzug",
-            vmaxKmh = 120,
-            fleetEstimate = 497,
-            wikiArticleTitle = "Stadler_Regio-Shuttle_RS_1",
-        ),
-    )
+        // Triebzüge Diesel
+        TrainSeries("605", "ICE TD", "Triebzug", 160, 3, "DB-Baureihe_605"),
+        // Maybe add Pendolino here? 2 are not scrapped yet and may be on museum tours
+        TrainSeries("612", "RegioSwinger", "Triebzug", 160, 192, "DB-Baureihe_612_(1998)"),
+        TrainSeries("620", "Alstom Coradia LINT 81", "Triebzug", 140, 65, "Alstom_Coradia_LINT#LINT_81", aliases = listOf("621")),
+        TrainSeries("622", "Alstom Coradia LINT 54", "Triebzug", 140, 279, "Alstom_Coradia_LINT#LINT_54"),
+        TrainSeries("623", "Alstom Coradia LINT 41", "Triebzug", 140, 503, "Alstom_Coradia_LINT#LINT_41"),
+        TrainSeries("626", "NE 81", "Triebzug", 100, 14, "NE_81"),
+        TrainSeries("628", "628", "Triebzug", 140, 309, "DB-Baureihe_628"),
+        TrainSeries("631", "PESA LINK", "Triebzug", 140, 80, "Pesa_Link", aliases = listOf("632","633")),
+        TrainSeries("640", "Alstom Coradia LINT 27", "Triebzug", 120, 309, "Alstom_Coradia_LINT#LINT_27"),
+        TrainSeries("641", "Alstom Coradia A TER", "Triebzug", 120, 40, "Alstom_Coradia_LINT#LINT_27"),
+        TrainSeries("642", "Siemens Desiro Classic", "Triebzug", 120, 500, "Siemens_Desiro_Classic"),
+        TrainSeries("643", "Siemens Bombardier Talent", "Triebzug", 120, 780, "Bombardier_Talent"),
+        TrainSeries("646", "GTW 2/6", "Triebzug", 120, 40, "Stadler_GTW_1._Generation"), // In use in switzerland and germany. This is only german numbers
+        TrainSeries("648", "Alstom Coradia LINT 41", "Triebzug", 120, 500, "Alstom_Coradia_LINT#LINT_41"),
+        TrainSeries("650", "Regio-Shuttle RS1", "Triebzug", 120, 500, "Stadler_Regio-Shuttle_RS_1"),
+        TrainSeries("675", "VT 18.16", "Triebzug", 160, 1, "DR-Baureihe_VT_18.16"), // one is being restored
+        // Could add more which are only in use by museums like VT 98, BR 670
+        )
 }
